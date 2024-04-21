@@ -15,6 +15,28 @@ export default class NewBill {
     this.billId = null
     new Logout({ document, localStorage, onNavigate })
   }
+  
+  // TODO 3 (Bug-Hunt) we check the type of image file (jpeg/jpg/png are allowed)
+  fileValidation = file => {
+    const fileTypes = ["image/jpeg", "image/jpg", "image/png"];
+    
+	if (!fileTypes.includes(file.type)) {
+      this.document
+        .querySelector(`input[data-testid="file"]`)
+        .classList.add("is-invalid");
+		console.log("failed")
+
+      return false;
+    }
+    this.document
+      .querySelector(`input[data-testid="file"]`)
+      .classList.remove("is-invalid");
+	  console.log("valid")
+
+    return true;
+  };
+
+
   handleChangeFile = e => {
     e.preventDefault()
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
@@ -25,6 +47,8 @@ export default class NewBill {
     formData.append('file', file)
     formData.append('email', email)
 
+	// TODO 3 (Bug-Hunt) if type is incorrect, we don't send it to sotre
+	this.fileValidation(file) &&
     this.store
       .bills()
       .create({
@@ -57,6 +81,9 @@ export default class NewBill {
       fileName: this.fileName,
       status: 'pending'
     }
+	// TODO 3 (Bug-Hunt) if no filename selected, submit be impossible
+	if (!this.fileName) return;
+
     this.updateBill(bill)
     this.onNavigate(ROUTES_PATH['Bills'])
   }
