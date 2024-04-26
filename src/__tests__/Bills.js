@@ -36,6 +36,7 @@ describe("Given I am connected as an employee", () => {
       const windowIcon = screen.getByTestId('icon-window')
 	  
       //to-do write expect expression
+	  // icon should be active (highlighted)
       expect(windowIcon.getAttribute('class')).toMatch("active-icon"); //TODO 5
     })
     test("Then bills should be ordered from earliest to latest", () => {
@@ -49,7 +50,7 @@ describe("Given I am connected as an employee", () => {
 
 
 
-  //-------------
+  // TODO 6 new tests
 
 
   describe("When I click on New Bill Button", () => {
@@ -148,7 +149,7 @@ describe("Given I am connected as an employee", () => {
 	});
   });
 
-  //TODO 6 test d'intégration GET
+  // TODO 6 integration GET
   describe("When I navigate to Bills Page", () => {
 	test("fetches bills from mock API GET", async () => {
 	  jest.spyOn(mockedStore, "bills");
@@ -188,7 +189,7 @@ describe("Given I am connected as an employee", () => {
 	  });
 	  window.onNavigate(ROUTES_PATH.Bills);
 	  await new Promise(process.nextTick);
-	  const message = screen.getByText(/Erreur 404/);
+	  const message = await screen.getByText(/Erreur 404/);
 	  expect(message).toBeTruthy();
 	});
 
@@ -203,7 +204,7 @@ describe("Given I am connected as an employee", () => {
 
 	  window.onNavigate(ROUTES_PATH.Bills);
 	  await new Promise(process.nextTick);
-	  const message = screen.getByText(/Erreur 500/);
+	  const message = await screen.getByText(/Erreur 500/);
 	  expect(message).toBeTruthy();
 	});
   });

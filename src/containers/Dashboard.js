@@ -145,12 +145,13 @@ export default class {
       this.counter ++
     }
 
+	// everytime we open the tabs, we add listener to all exisitng bills
     bills.forEach(bill => {
-		$(`#open-bill${bill.id}`).off("click"); //TODO 4 - On remove l'eventListener existant avant d'en ajouter un
-		$(`#open-bill${bill.id}`).on("click", e => {
-			this.handleEditTicket(e, bill, bills);
-		  });
-    //   $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
+		$(`#open-bill${bill.id}`).off("click"); //TODO 4 - remvoe existinv listener before adding one
+		// $(`#open-bill${bill.id}`).on("click", e => {
+		// 	this.handleEditTicket(e, bill, bills);
+		//   });
+      $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
     })
 
     return bills

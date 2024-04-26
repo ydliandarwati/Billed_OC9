@@ -62,7 +62,7 @@ describe("When I am on NewBill Page", () => {
     router();
   });
 
-  test("Then mail icon on verticallayout should be highlighted", async () => {
+  test("Then mail icon on vertical layout should be highlighted", async () => {
     window.onNavigate(ROUTES_PATH.NewBill);
     await waitFor(() => screen.getByTestId("icon-mail"));
     const Icon = screen.getByTestId("icon-mail");
@@ -98,42 +98,6 @@ describe("When I am on NewBill Page", () => {
   })
 });
 
-/* Api */
-describe("When I am on NewBill Page and submit the form", () => {
-  beforeEach(() => {
-    jest.spyOn(mockStore, "bills");
-    Object.defineProperty(window, "localStorage", { value: localStorageMock });
-    window.localStorage.setItem(
-      "user",
-      JSON.stringify({
-        type: "Employee",
-        email: "a@a",
-      })
-    );
-    const root = document.createElement("div");
-    root.setAttribute("id", "root");
-    document.body.appendChild(root);
-    router();
-  });
-
-//   describe("user submit form valid", () => {
-//     test("call api update bills", async () => {
-//       const newBill = new NewBill({
-//         document,
-//         onNavigate,
-//         store: mockStore,
-//         localeStorage: localStorageMock,
-//       });
-//       const handleSubmit = jest.fn(newBill.handleSubmit);
-//       const form = screen.getByTestId("form-new-bill");
-//       form.addEventListener("submit", handleSubmit);
-//       fireEvent.submit(form);
-//       expect(mockStore.bills).toHaveBeenCalled();
-//     });
-//   });
-
-
-});
 
 // TODO 7 POST Bill
 describe("When I do fill fields in correct format and I click on submit button", () => {
