@@ -120,14 +120,12 @@ describe("Given I am connected as an employee", () => {
 
 	  const modale = document.getElementById("modaleFile");
 
-	  $.fn.modal = jest.fn(() => modale.classList.add("show")); //mock de la modale Bootstrap
-
+	  $.fn.modal = jest.fn(() => modale.classList.add("show")); 
+	  
 	  iconEyes.forEach(iconEye => {
 		iconEye.addEventListener("click", () => handleClickIconEye(iconEye));
 		userEvent.click(iconEye);
-
 		expect(handleClickIconEye).toHaveBeenCalled();
-
 		expect(modale).toHaveClass("show");
 	  });
 	});
